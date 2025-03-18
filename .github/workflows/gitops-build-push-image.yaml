@@ -25,7 +25,7 @@ jobs:
           -o sonarqube_metrics.json
 
       - name: Upload SonarQube Metrics as Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: sonarqube-report
           path: sonarqube_metrics.json
