@@ -21,7 +21,7 @@ jobs:
       - name: Fetch SonarQube Metrics
         run: |
           curl -u "squ_378157683df54d62093e293c220e78c170b47556:" \
-          "${{ secrets.SONAR_HOST_URL }}/api/measures/component?component=talentis&metricKeys=security_hotspots,reliability_rating,maintainability_rating,coverage,duplicated_lines_density,complexity,bugs,vulnerabilities,sqale_index,code_smells" \
+          "${{ secrets.SONAR_HOST_URL }}/api/measures/component?component=talentis&metricKeys=security_hotspots,reliability_rating,coverage,duplicated_lines_density,complexity,bugs,vulnerabilities,sqale_index,code_smells" \
           -o sonarqube_metrics.json
 
       - name: Upload SonarQube Metrics as Artifact
