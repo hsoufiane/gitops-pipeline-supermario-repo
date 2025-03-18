@@ -18,6 +18,19 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      - name: Fetch SonarQube Metrics
+        run: |
+          curl -u "squ_378157683df54d62093e293c220e78c170b47556:" \
+          "${{ secrets.SONAR_HOST_URL }}/api/measures/component?component=talentis&metricKeys=security_hotspots,reliability_rating,maintainability_rating,coverage,duplicated_lines_density,complexity,bugs,vulnerabilities,sqale_index,code_smells" \
+          -o sonarqube_metrics.json
+
+      - name: Upload SonarQube Metrics as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: sonarqube-report
+          path: sonarqube_metrics.json
+
+
       # If you wish to fail your job when the Quality Gate is red, uncomment the
       # following lines. This would typically be used to fail a deployment.
       # - uses: sonarsource/sonarqube-quality-gate-action@master
